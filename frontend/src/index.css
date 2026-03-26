@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #10b981; /* Emerald/Electric Green */
+  --color-secondary: #0f172a; /* Slate 900 */
+  --color-accent: #3b82f6; /* Blue 500 */
+  --color-bg-light: #ffffff;
+  --color-surface: #f8fafc;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-tamil: 'Inter', 'Latha', 'Vijaya', 'FreeSerif', 'Tamil Sangam MN', 'Microsoft Tamil', sans-serif;
+  
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 20px -5px rgba(16, 185, 129, 0.2);
+}
+
+:root {
+  --primary: #10b981;
+  --secondary: #0f172a;
+  --accent: #3b82f6;
+  --bg-color: #ffffff;
+  --text-color: #0f172a;
+  --text-muted: #334155; /* Slate 700 - much darker for light mode visibility */
+  --surface-color: #f1f5f9; /* Slate 100 - better definition for light mode surfaces */
+  --border-color: #cbd5e1; /* Slate 300 - clearer borders for light mode */
+}
+
+.dark {
+  --bg-color: #020617; /* Slate 950 */
+  --text-color: #f8fafc; /* Slate 50 */
+  --text-muted: #94a3b8; /* Slate 400 - more visible in dark */
+  --surface-color: #0f172a; /* Slate 900 */
+  --border-color: #1e293b; /* Slate 800 */
+}
+
+/* Force high contrast in light mode for common slate colors used as text */
+.text-slate-400 { color: #475569 !important; } /* Slate 600 */
+.text-slate-500 { color: #334155 !important; } /* Slate 700 */
+.text-slate-600 { color: #1e293b !important; } /* Slate 800 */
+
+/* Restore dark mode overrides */
+.dark .text-slate-900 { color: #f8fafc !important; }
+.dark .text-slate-800 { color: #f1f5f9 !important; }
+.dark .text-slate-700 { color: #e2e8f0 !important; }
+.dark .text-slate-600 { color: #cbd5e1 !important; }
+.dark .text-slate-500 { color: #94a3b8 !important; }
+.dark .text-slate-400 { color: #cbd5e1 !important; }
+.dark .text-slate-300 { color: #e2e8f0 !important; }
+
+.dark .bg-white { background-color: #020617 !important; }
+.dark .bg-slate-50 { background-color: #0f172a !important; }
+.dark .bg-slate-100 { background-color: #1e293b !important; }
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  @apply font-sans min-h-screen antialiased selection:bg-primary/20 selection:text-primary leading-[1.6];
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Tamil Specific Overrides */
+.lang-ta {
+  font-family: var(--font-tamil);
+  line-height: 1.8; /* Better readability for Tamil characters */
+  font-size: 0.95em; /* Slightly reduce base font size for Tamil */
+}
+
+.lang-ta .uppercase,
+.lang-ta .tracking-widest,
+.lang-ta .tracking-tighter,
+.lang-ta .tracking-\[0\.2em\],
+.lang-ta .italic {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-style: normal !important;
+}
+
+.lang-ta h1 { font-size: 0.85em !important; }
+.lang-ta h2 { font-size: 0.9em !important; }
+.lang-ta h3 { font-size: 0.95em !important; }
+
+.lang-ta .title-display {
+  font-size: clamp(2rem, 8vw, 4.5rem) !important; /* Dynamically reduce large display titles */
+  line-height: 1.3 !important;
+}
+
+.lang-ta h1, .lang-ta h2, .lang-ta h3, .lang-ta h4 {
+  line-height: 1.4;
+  padding-bottom: 0.25rem;
+  word-break: keep-all; /* Prevent awkward breaks in Tamil words */
+  overflow-wrap: break-word;
+}
+
+/* Fix for containers overflowing with long Tamil text */
+.lang-ta .flex {
+  flex-wrap: wrap; /* Allow wrapping by default in flex containers for Tamil */
+}
+
+/* Specific layout fixes for Tamil to prevent container overflow */
+.lang-ta .container {
+  max-width: 100% !important;
+  overflow-x: hidden;
+}
+
+.lang-ta p, .lang-ta span, .lang-ta li {
+  font-size: 0.92rem !important; /* Slightly smaller body/inline text */
+}
+
+.lang-ta h1 { font-size: 90% !important; }
+.lang-ta h2 { font-size: 92% !important; }
+.lang-ta h3 { font-size: 95% !important; }
+
+.lang-ta .grid {
+  gap: 1.5rem !important; /* Slightly reduce gap in grids for Tamil */
+}
+
+/* Navbar specific fixes for Tamil */
+.lang-ta nav.flex {
+  flex-wrap: nowrap !important;
+  gap: 0.75rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.lang-ta nav.flex .hidden.md\:flex {
+  gap: 0.5rem !important;
+}
+
+.lang-ta nav.flex a {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  font-size: 9px !important; /* Reduce nav link size */
+}
+
+/* Button fixes for Tamil */
+.lang-ta .btn-primary,
+.lang-ta .btn-secondary,
+.lang-ta .btn-outline {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  white-space: normal;
+  text-align: center;
+  word-break: break-word;
+  height: auto !important;
+  min-height: 3.5rem;
+  line-height: 1.2;
+  font-size: 9px !important; /* Reduce button text size */
+}
+
+/* Badge fixes for Tamil */
+.lang-ta span.bg-red-500, 
+.lang-ta div.bg-emerald-500 {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.font-tamil {
+  font-family: var(--font-tamil) !important;
+}
+
+#root {
+  background-color: var(--bg-color);
+  @apply flex flex-col min-h-screen w-full overflow-x-hidden;
+}
+
+main {
+  background-color: var(--bg-color);
+  @apply flex-grow;
+}
+
+/* Neo-Minimalist glass */
+.glass-modern {
+  background-color: color-mix(in srgb, var(--bg-color) 90%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  @apply shadow-soft;
+}
+
+/* Minimalist Buttons */
+.btn-primary {
+  @apply bg-primary hover:bg-emerald-600 text-white px-8 py-3.5 rounded-full font-black transition-all duration-300 shadow-glow hover:shadow-primary/30 active:scale-95 flex items-center justify-center gap-2 uppercase tracking-widest text-[10px] min-h-[3.5rem];
+}
+
+.btn-secondary {
+  @apply bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-900 px-8 py-3.5 rounded-full font-black transition-all duration-300 flex items-center justify-center gap-2 shadow-soft active:scale-95 uppercase tracking-widest text-[10px] min-h-[3.5rem];
+}
+
+.btn-outline {
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  @apply bg-transparent px-8 py-3.5 rounded-full font-black transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 uppercase tracking-widest text-[10px] min-h-[3.5rem];
+}
+
+/* Card v3 */
+.card-v3 {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  @apply rounded-[3rem] shadow-soft hover:shadow-xl transition-all duration-500 overflow-hidden;
+}
+
+/* Typography v3 */
+h1, h2, h3, h4 {
+  color: var(--text-color);
+  @apply tracking-tight font-black leading-[1.3] pb-1;
+}
+
+.title-display {
+  color: var(--text-color);
+  @apply text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-[1.2] pb-2;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  @apply text-lg leading-[1.6] font-medium;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Form Inputs */
+.input-field {
+  @apply w-full px-6 py-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-bold text-slate-700 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600;
+}
+
+/* Model Viewer Virtual AR Transparency */
+.model-viewer-ar {
+  background-color: transparent !important;
+  --background-color: transparent !important;
+}
+
+.model-viewer-ar::part(canvas) {
+  background-color: transparent !important;
+}

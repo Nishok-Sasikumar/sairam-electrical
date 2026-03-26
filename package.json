@@ -1,0 +1,24 @@
+{
+  "name": "sairam-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "install": "cd frontend && npm install",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "razorpay": "^2.9.6",
+    "nodemailer": "^8.0.1",
+    "crypto": "^1.0.1",
+    "firebase": "^10.12.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
